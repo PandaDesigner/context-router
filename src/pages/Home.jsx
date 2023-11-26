@@ -19,7 +19,7 @@ export const Home = () => {
           onClick={() => handlerLogin()}
           type="button"
         >
-          Logins
+          Home
         </button>{' '}
       </div>
     </>

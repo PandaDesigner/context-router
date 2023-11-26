@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
@@ -33,12 +33,21 @@ export const Navbar = () => {
         >
           <ul className="navbar-nav nav-pills gap-4">
             <li className="nav-item">
+              <NavLink className="nav-link link-light fw-lighter " to={'/'}>
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link link-light fw-lighter" to={'/login'}>
+                Login
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink
                 className="nav-link link-light fw-lighter "
-                aria-current="page"
-                to={'/'}
+                to={'/register'}
               >
-                Home
+                Register
               </NavLink>
             </li>
             {user && (
