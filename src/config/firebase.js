@@ -3,7 +3,8 @@ import { initializeApp } from 'firebase/app';
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  signOut
 } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -24,4 +25,8 @@ export const login = ({ email, password }) => {
 
 export const register = ({ email, password }) => {
   return createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const logout = () => {
+  return signOut(auth);
 };

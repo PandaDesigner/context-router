@@ -1,11 +1,18 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import { logout } from '../config/firebase';
 
 export const Navbar = () => {
   const [toggle, setToggle] = useState(true);
 
-  console.log(useUser());
+  const handlerLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { user, setUser } = useUser();
 
@@ -62,9 +69,7 @@ export const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <button
-                    onClick={() => {
-                      setUser(false);
-                    }}
+                    onClick={handlerLogout}
                     className="btn btn-outline-warning "
                   >
                     Logout
