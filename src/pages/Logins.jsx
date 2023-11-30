@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { login } from '../config/firebase';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 export const Logins = () => {
-  const [userLog, setUserLog] = useState({ email: '', password: '' });
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,20 +15,36 @@ export const Logins = () => {
     }
   }, [user]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (
+    { email, password },
+    { setSubmitting, setErrors, resetForm }
+  ) => {
+    console.log({ email, password });
     try {
-      const credentialUser = await login(userLog);
+      const credentialUser = await login({ email, password });
       console.log(credentialUser);
+      resetForm();
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
+      console.log(error.message);
+      if (error.code === 'auth/invalid-login-credentials') {
+        return setErrors({
+          email: 'Usuario no Registrado'
+        });
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  /*   const handlerLogin = () => {
-    setUser(true);
-    navigate('/dashboard');
-  }; */
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Email no válido').required('Email Requerido'),
+    password: Yup.string()
+      .trim()
+      .min(6, 'MInimo 6 Carácteres')
+      .required('Password Requerido')
+  });
+
   return (
     <>
       <div
@@ -41,40 +58,73 @@ export const Logins = () => {
         }}
       >
         <h1 className="fs-1">Login</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="form-group my-5 w-50 d-flex flex-column p-5  gap-3 bg-body-secondary rounded-4 shadow-lg  "
+
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
         >
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className="form-control "
-              type="text"
-              placeholder="Ingrese Email"
-              value={userLog.email}
-              onChange={(e) =>
-                setUserLog({ ...userLog, email: e.target.value })
-              }
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              className="form-control "
-              type="password"
-              placeholder="Ingrese Password"
-              value={userLog.password}
-              onChange={(e) =>
-                setUserLog({ ...userLog, password: e.target.value })
-              }
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
-        </form>
+          {({
+            values,
+            handleSubmit,
+            handleChange,
+            errors,
+            touched,
+            handleBlur,
+            isSubmitting
+          }) => {
+            return (
+              <form
+                onSubmit={handleSubmit}
+                className="form-group my-5 w-50 d-flex flex-column p-5  gap-3 bg-body-secondary rounded-4 shadow-lg  "
+              >
+                <div>
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    className="form-control "
+                    type="text"
+                    placeholder="Ingrese Email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+
+                  {errors.email && touched.email && (
+                    <div className="alert alert-danger mt-2 p-2" role="alert">
+                      {errors.email}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <label htmlFor="password">Password</label>
+                  <input
+                    name="password"
+                    className="form-control "
+                    type="password"
+                    placeholder="Ingrese Password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.password && touched.password && (
+                    <div className="alert alert-danger mt-2 p-2" role="alert">
+                      {errors.password}
+                    </div>
+                  )}
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary"
+                >
+                  Login
+                </button>
+              </form>
+            );
+          }}
+        </Formik>
       </div>
     </>
   );
