@@ -876,6 +876,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.6.tgz#22958c042e10b67463997bd6ea7115fe28cbcaf9"
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
+"@fontsource/roboto@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.0.8.tgz#613b477a56f21b5705db1a67e995c033ef317f76"
+  integrity sha512-XxPltXs5R31D6UZeLIV1td3wTXU3jzd3f2DLsXI8tytMGBkIsGcc9sIyiupRtA8y73HAhuSCeweOoBqf6DbWCA==
+
 "@grpc/grpc-js@~1.9.0":
   version "1.9.11"
   resolved "https://registry.npmjs.org/@grpc/grpc-js/-/grpc-js-1.9.11.tgz"
@@ -962,6 +967,26 @@
   version "5.14.19"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.14.19.tgz#9c04ad047c378d857d529ef9c535b60a10b9a47c"
   integrity sha512-y4JseIen5pmZs1n9hHy95HKKioKco8f6N2lford2AmjJigVJOv0KsU0qryiCpyuEUZmi/xCduVilHsK9DSkPcA==
+
+"@mui/icons-material@^5.14.19":
+  version "5.14.19"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.14.19.tgz#6e0f4e9d89f99517d3c0ee65dee7ac97753755af"
+  integrity sha512-yjP8nluXxZGe3Y7pS+yxBV+hWZSsSBampCxkZwaw+1l+feL+rfP74vbEFbMrX/Kil9I/Y1tWfy5bs/eNvwNpWw==
+  dependencies:
+    "@babel/runtime" "^7.23.4"
+
+"@mui/lab@^5.0.0-alpha.154":
+  version "5.0.0-alpha.154"
+  resolved "https://registry.yarnpkg.com/@mui/lab/-/lab-5.0.0-alpha.154.tgz#c352e164e9f0313317dd8dc1bfd17236fbefbbc8"
+  integrity sha512-Rrhu8eUknjV6hhPMqq52e/p4/c6rvnu/k0AhysuljsHDZcHThYEZNe1mHFLveQ1RIje2VnJSsgmcNfcZKeOOAg==
+  dependencies:
+    "@babel/runtime" "^7.23.4"
+    "@mui/base" "5.0.0-beta.25"
+    "@mui/system" "^5.14.19"
+    "@mui/types" "^7.2.10"
+    "@mui/utils" "^5.14.19"
+    clsx "^2.0.0"
+    prop-types "^15.8.1"
 
 "@mui/material@^5.14.19":
   version "5.14.19"

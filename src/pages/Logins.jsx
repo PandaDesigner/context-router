@@ -4,6 +4,7 @@ import { useUser } from '../context/UserContext';
 import { login } from '../config/firebase';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { Box, Typography } from '@mui/material';
 
 export const Logins = () => {
   const { user } = useUser();
@@ -47,9 +48,9 @@ export const Logins = () => {
 
   return (
     <>
-      <div
-        className="container my-5  "
-        style={{
+      <Box
+        className="container"
+        sx={{
           height: '70vh',
           display: 'flex',
           justifyContent: 'center',
@@ -57,7 +58,9 @@ export const Logins = () => {
           flexDirection: 'column'
         }}
       >
-        <h1 className="fs-1">Login</h1>
+        <Typography variant="h2" fontWeight={500}>
+          Login
+        </Typography>
 
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -125,7 +128,7 @@ export const Logins = () => {
             );
           }}
         </Formik>
-      </div>
+      </Box>
     </>
   );
 };
